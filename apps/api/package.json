@@ -1,0 +1,21 @@
+{
+  "name": "@fimco/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -b tsconfig.build.json"
+  },
+  "dependencies": {
+    "@fimco/adapters": "*",
+    "@fimco/core": "*",
+    "@fimco/shared": "*",
+    "fastify": "^5.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.16.0"
+  }
+}

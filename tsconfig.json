@@ -10,5 +10,5 @@
       "@fimco/adapters": ["packages/adapters/src/index.ts"]
     }
   },
-  "include": ["packages/*/src/**/*.ts"]
+  "include": ["packages/*/src/**/*.ts", "apps/*/src/**/*.ts"]
 }

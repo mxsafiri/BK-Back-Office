@@ -54,13 +54,15 @@ packages/
   adapters/    real outside-world integrations                          (deps: core, shared)
     ntzs/      nTZS HTTP CashLedger, webhook verifier + receiver
 apps/
-  api/           Fastify HTTP service + jobs (the one deployable backend)   [planned]
+  api/           Fastify HTTP service + jobs (the one deployable backend)
+    health · nTZS webhook (HMAC) · onboarding · account balance · default-deny RBAC
   web-operator/  Next.js operator console                                   [planned]
   web-portal/    Next.js client portal                                      [planned]
 ```
 
 Run `npm install` once at the root; workspaces are linked automatically. `npm run test` /
-`typecheck` / `lint` / `build` operate across the whole repo.
+`typecheck` / `lint` / `build` operate across the whole repo. Run the backend locally with
+`npm run dev -w @fimco/api` (defaults to port 3001; `GET /health` to check).
 
 ## The one pattern to copy
 
