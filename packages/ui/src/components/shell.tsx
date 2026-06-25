@@ -64,7 +64,7 @@ export function TopBar({ title, subtitle, right }: { title: ReactNode; subtitle?
 
 export function AppShell({ sidebar, topbar, children }: { sidebar: ReactNode; topbar?: ReactNode; children: ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-canvas-cream">
+    <div className="flex min-h-screen bg-canvas-base">
       {sidebar}
       <div className="flex min-w-0 flex-1 flex-col">
         {topbar}

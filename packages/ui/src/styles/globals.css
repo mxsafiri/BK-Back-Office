@@ -7,8 +7,8 @@
     --font-mono: "IBM Plex Mono", ui-monospace, monospace;
   }
   html {
-    background-color: #f3e2d6; /* canvas-cream */
-    color: #1f1b19; /* ink */
+    background-color: #F4F5F7; /* canvas-base */
+    color: #14202E; /* ink */
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }

@@ -2,11 +2,15 @@
 
 One design system, two apps: **Operator Console** (internal staff) and **Client Portal**
 (clients). Shared tokens + components (`packages/ui`); the apps differ only in navigation,
-permissions, and screen set. Derived from the brand reference and verified against it.
+permissions, and screen set. Built on the **FIMCO brand palette** (navy + red, from the logo);
+the layout/component patterns are drawn from the brand reference.
 
-Brand feel: **warm terracotta + cream, generously rounded, soft cards, friendly-but-professional**.
-It must read **trustworthy and financial** — unambiguous money, clear data tables, accessible
-contrast. Both products ship **light mode**; the dark boards in the reference are marketing chrome.
+Brand feel: **FIMCO navy + red on a light neutral canvas**, rounded soft cards, professional and
+trustworthy. **Navy** is the primary/chrome colour (sidebar, buttons, active nav). **FIMCO red**
+is the brand accent and — being red — does double duty as the semantic danger/negative colour, so
+red always means *attention / loss / destructive*, never "go". It must read **trustworthy and
+financial** — unambiguous money, clear data tables, accessible contrast. Both products ship **light
+mode**.
 
 ## Principles for a money UI
 
@@ -14,37 +18,39 @@ contrast. Both products ship **light mode**; the dark boards in the reference ar
    signs consistently. Rendered from integer **minor units** — formatting is display-only; math
    stays integer, never floats. The only sanctioned renderer is the `MoneyAmount` component.
 2. **Status is semantic, not decorative.** A fixed status palette maps 1:1 to domain states.
-   Never reuse brand terracotta as a danger signal — danger is pushed redder (`#D14B45`).
+   Navy is the only primary/action colour; FIMCO red (`#D8302B`) is reserved for the brand accent
+   and for danger / negative money / destructive — never for a "go" action.
 3. **Money-moving + destructive actions are guarded.** Confirmation step, maker-checker visible,
    no single-actor release (`MakerCheckerPanel` / `ConfirmationGuard`).
 4. **Density where it matters.** Overviews breathe; tables and queues are compact, hairline
    dividers, no vertical gridlines.
-5. **Accessible contrast.** Primary data is ink (`#1F1B19`) on white/cream; muted tones are for
-   labels/captions only.
+5. **Accessible contrast.** Primary data is ink (`#14202E`) on white/light canvas; muted tones are
+   for labels/captions only. White text only sits on navy/red fills, never on the light canvas.
 
 ## Tokens
 
 ### Color
 | Token | Hex | Use |
 |---|---|---|
-| `brand-primary` | `#C76A57` | Sidebar, primary buttons, active nav, accents |
-| `brand-primary-hover` | `#B2563F` | Hover |
-| `brand-primary-pressed` | `#9C4631` | Pressed |
-| `brand-tint` | `#F7DCD3` | Selected row, active chip |
-| `brand-wash` | `#FBEEE8` | Active tab fill, subtle brand bg |
-| `canvas-cream` | `#F3E2D6` | App canvas behind cards |
-| `canvas-brand` | `#C76A57` | Optional full-bleed terracotta panels (sidebar, hero) |
+| `brand` (navy) | `#1F3A5C` | Sidebar, primary buttons, active nav, links |
+| `brand-hover` | `#193150` | Hover |
+| `brand-pressed` | `#132742` | Pressed |
+| `brand-tint` | `#DCE4EF` | Selected row, avatar fill |
+| `brand-wash` | `#EEF2F8` | Active tab fill, subtle navy bg |
+| `accent` (FIMCO red) | `#D8302B` | Brand accent; same red as `danger` |
+| `canvas-base` | `#F4F5F7` | App canvas behind cards |
+| `canvas-brand` | `#1F3A5C` | Full-bleed navy panels (sidebar, hero) |
 | `surface` | `#FFFFFF` | Cards, tables, inputs, modals |
-| `surface-subtle` | `#F7F5F4` | Input fills, alt rows |
-| `ink` | `#1F1B19` | Primary text |
-| `text-secondary` | `#6B6460` | Labels, captions, table headers |
-| `border-hairline` | `#E7DDD5` | Card borders, dividers |
+| `surface-subtle` | `#F1F3F6` | Input fills, alt rows |
+| `ink` | `#14202E` | Primary text |
+| `muted` | `#5A6776` | Labels, captions, table headers |
+| `hairline` | `#E2E7EE` | Card borders, dividers |
 | `success` / `money-positive` | `#2F9E5E` | Credits, settled, positive delta |
 | `warning` | `#E08A1E` | Pending / attention |
-| `danger` / `money-negative` | `#D14B45` | Debits, failed, destructive |
+| `danger` / `money-negative` | `#D8302B` | Debits, failed, destructive (= FIMCO red) |
 | `info` | `#2D6FE0` | Scheduled, informational |
-| `status-processing` | `#7A5AF8` | In-flight settlement |
-| `*-tint` | — | Chip backgrounds (`success-tint #D6F0DF`, `warning-tint #FBE9CE`, `danger-tint #FBE0DE`, `info-tint #DCE7FB`) |
+| `processing` | `#6E59E0` | In-flight settlement |
+| `*-tint` | — | Chip backgrounds (`success-tint #D6F0DF`, `warning-tint #FBE9CE`, `danger-tint #FBE3E2`, `info-tint #DCE7FB`) |
 
 **Status badge map:** Pending = warning · Scheduled = info · Processing = processing ·
 Settled/Active = success · Failed/Rejected = danger · On-hold/Requested = secondary. KYC and
