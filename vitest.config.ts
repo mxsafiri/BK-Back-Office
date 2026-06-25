@@ -10,6 +10,7 @@ export default defineConfig({
       "@fimco/shared": pkg("./packages/shared/src/index.ts"),
       "@fimco/core": pkg("./packages/core/src/index.ts"),
       "@fimco/adapters": pkg("./packages/adapters/src/index.ts"),
+      "@fimco/api-client": pkg("./packages/api-client/src/index.ts"),
     },
   },
   test: {
