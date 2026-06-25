@@ -11,5 +11,7 @@
       "@fimco/api-client": ["packages/api-client/src/index.ts"]
     }
   },
-  "include": ["packages/*/src/**/*.ts", "apps/*/src/**/*.ts"]
+  "include": ["packages/*/src/**/*.ts", "apps/*/src/**/*.ts"],
+  "//exclude": "packages/ui and the Next apps are frontend (bundler resolution, JSX); Next typechecks them, not this backend config.",
+  "exclude": ["packages/ui", "apps/web-operator", "apps/web-portal"]
 }

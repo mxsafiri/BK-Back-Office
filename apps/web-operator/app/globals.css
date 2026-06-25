@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background-color: #f3e2d6; /* canvas-cream */
+    color: #1f1b19; /* ink */
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-quicksand), var(--font-inter), sans-serif;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}

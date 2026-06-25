@@ -4,15 +4,21 @@ import tsparser from "@typescript-eslint/parser";
 import globals from "globals";
 
 export default [
-  { ignores: ["**/dist/**", "**/node_modules/**", "**/.next/**"] },
+  { ignores: ["**/dist/**", "**/node_modules/**", "**/.next/**", "**/next-env.d.ts"] },
   js.configs.recommended,
+  // CommonJS config files (tailwind/postcss presets, *.cjs).
   {
-    files: ["packages/**/*.ts", "apps/**/*.ts", "apps/**/*.tsx"],
+    files: ["**/*.cjs", "**/tailwind.config.js", "**/postcss.config.js"],
+    languageOptions: { sourceType: "commonjs", globals: { ...globals.node } },
+  },
+  // TypeScript / React source across backend packages and frontend apps.
+  {
+    files: ["packages/**/*.ts", "packages/**/*.tsx", "apps/**/*.ts", "apps/**/*.tsx"],
     languageOptions: {
       parser: tsparser,
       ecmaVersion: 2022,
       sourceType: "module",
-      globals: { ...globals.node },
+      globals: { ...globals.node, ...globals.browser },
     },
     plugins: { "@typescript-eslint": tseslint },
     rules: {

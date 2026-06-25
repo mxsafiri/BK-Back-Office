@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "operator",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start", "-w", "@fimco/web-operator"],
+      "port": 3002
+    },
+    {
+      "name": "portal",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start", "-w", "@fimco/web-portal"],
+      "port": 3003
+    }
+  ]
+}
