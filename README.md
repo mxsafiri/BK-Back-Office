@@ -67,6 +67,13 @@ Run `npm install` once at the root; workspaces are linked automatically. `npm ru
 Every money path goes through **maker-checker → idempotency → audit**. See
 `packages/core/src/controls/moneyMove.integration.test.ts` for the template.
 
+## Contributing & docs
+
+- [`CONTRIBUTING.md`](./CONTRIBUTING.md) — setup, branch/PR flow, the money-path review gate, DoD.
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md) — frontend / backend / production boundaries.
+- [`docs/adr/`](./docs/adr) — architecture decision records (stack, structure).
+- [`CLAUDE.md`](./CLAUDE.md) — domain rules + non-negotiable money-movement invariants.
+
 ## Non-negotiables
 
 Idempotency, webhook signature verification, maker-checker, integer-only money math,

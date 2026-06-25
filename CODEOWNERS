@@ -1,0 +1,24 @@
+# Code owners — who must review what (GitHub enforces this when branch protection
+# "Require review from Code Owners" is on). Segregation of duties: the author of a
+# money/position change cannot be its sole approver.
+#
+# TODO: replace @mxsafiri with a dedicated team (e.g. @fimco/money-paths) once the org
+# and accountable money-movement owner are set up (see DISCOVERY_CHECKLIST item 5).
+
+# Default owner for everything
+*                                     @mxsafiri
+
+# Money- and position-moving paths — require the accountable senior reviewer
+/packages/shared/src/money.ts         @mxsafiri
+/packages/core/src/cash/              @mxsafiri
+/packages/core/src/ledger/            @mxsafiri
+/packages/core/src/accounts/          @mxsafiri
+/packages/core/src/reconciliation/    @mxsafiri
+/packages/core/src/controls/          @mxsafiri
+/packages/adapters/                   @mxsafiri
+
+# Domain rules, guardrails, and architecture decisions
+/CLAUDE.md                            @mxsafiri
+/ARCHITECTURE.md                      @mxsafiri
+/docs/adr/                            @mxsafiri
+/.github/                             @mxsafiri
