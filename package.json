@@ -2,13 +2,17 @@
   "name": "fimco-bbo",
   "version": "0.0.1",
   "private": true,
-  "description": "FIMCO Broker Back Office — sell-side back office for the DSE ecosystem (Phase 0 scaffold)",
+  "description": "FIMCO Broker Back Office — sell-side back office for the DSE ecosystem (monorepo)",
   "type": "module",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -b tsconfig.build.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",

@@ -37,26 +37,35 @@ cp .env.example .env    # fill in nTZS TEST keys (ntzs_test_...)
 
 ## Layout
 
-See [`BUILD_PLAN.md`](./BUILD_PLAN.md) for the full module map and phased task breakdown.
+A monorepo (npm workspaces). See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for the frontend /
+backend / production boundaries and [`BUILD_PLAN.md`](./BUILD_PLAN.md) for the phased plan.
+Dependencies point strictly inward: `adapters → core → shared`.
 
 ```
-src/
-  shared/      money (integer minor units), ids, idempotency, errors
-  core/
+packages/
+  shared/      money (integer minor units), ids, idempotency, errors   (no deps)
+  core/        the domain — ports, logic, in-memory reference impls     (deps: shared)
     ledger/          append-only event store + securities ledger (orders/executions)
     controls/        maker-checker, audit log
-    cash/            CashLedger interface, treasury topology, cash mirror
+    cash/            CashLedger port, treasury topology, cash mirror, in-memory ledger
     accounts/        client accounts, holdings sub-ledger, onboarding
     reconciliation/  daily cash reconciliation job
-  adapters/
-    ntzs/      CashLedger adapter + stub, webhook verifier + receiver
-    kyc/       KYC provider port + stub (NIDA + bank reliance)
+    kyc/             KYC port + in-memory stub (NIDA + bank reliance)
+  adapters/    real outside-world integrations                          (deps: core, shared)
+    ntzs/      nTZS HTTP CashLedger, webhook verifier + receiver
+apps/
+  api/           Fastify HTTP service + jobs (the one deployable backend)   [planned]
+  web-operator/  Next.js operator console                                   [planned]
+  web-portal/    Next.js client portal                                      [planned]
 ```
+
+Run `npm install` once at the root; workspaces are linked automatically. `npm run test` /
+`typecheck` / `lint` / `build` operate across the whole repo.
 
 ## The one pattern to copy
 
 Every money path goes through **maker-checker → idempotency → audit**. See
-`src/core/controls/moneyMove.integration.test.ts` for the template.
+`packages/core/src/controls/moneyMove.integration.test.ts` for the template.
 
 ## Non-negotiables
 

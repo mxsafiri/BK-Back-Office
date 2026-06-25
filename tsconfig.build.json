@@ -1,0 +1,9 @@
+{
+  "//": "Production build via project references. `tsc -b tsconfig.build.json` builds each package to its dist/ in dependency order.",
+  "files": [],
+  "references": [
+    { "path": "packages/shared/tsconfig.build.json" },
+    { "path": "packages/core/tsconfig.build.json" },
+    { "path": "packages/adapters/tsconfig.build.json" }
+  ]
+}
