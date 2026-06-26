@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { OnboardRequest } from "@fimco/api-client";
-import { simulateOnboard } from "@/lib/demo";
+import { simulateOnboard } from "../../../../lib/demo";
 
 // DEMO: simulate onboarding in-memory (no hosted API). Same request/response contract as the
 // real backend, so swapping to the live API later is a one-line change.

@@ -11,6 +11,11 @@ export default [
     files: ["**/*.cjs", "**/tailwind.config.js", "**/postcss.config.js"],
     languageOptions: { sourceType: "commonjs", globals: { ...globals.node } },
   },
+  // ESM config files (next.config.mjs, etc.).
+  {
+    files: ["**/*.mjs"],
+    languageOptions: { sourceType: "module", globals: { ...globals.node } },
+  },
   // TypeScript / React source across backend packages and frontend apps.
   {
     files: ["packages/**/*.ts", "packages/**/*.tsx", "apps/**/*.ts", "apps/**/*.tsx"],

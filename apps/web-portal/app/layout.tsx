@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Quicksand, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-import { PortalShell } from "@/components/PortalShell";
+import { PortalShell } from "../components/PortalShell";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 const quicksand = Quicksand({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-quicksand", display: "swap" });

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { simulateBalance } from "@/lib/demo";
+import { simulateBalance } from "../../../../lib/demo";
 
 // DEMO: simulate a live balance read (no hosted API).
 export async function GET(req: Request) {

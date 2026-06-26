@@ -1,6 +1,6 @@
 import { PageHeader } from "@fimco/ui";
 import { BalanceLookup } from "./BalanceLookup";
-import { DEMO_ACCOUNT_ID } from "@/lib/demo";
+import { DEMO_ACCOUNT_ID } from "../../lib/demo";
 
 export default function AccountsPage({ searchParams }: { searchParams: { id?: string } }) {
   return (

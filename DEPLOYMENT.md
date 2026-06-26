@@ -4,6 +4,28 @@ The MVP demo is **three Next.js apps deployed to Vercel** from this monorepo. It
 demo** (sample data + in-memory simulation) — no backend server is hosted. The real Fastify API
 + Postgres are the paid-phase work.
 
+## Live (deployed under the JIKONI Vercel scope)
+
+| App | URL | Access |
+|---|---|---|
+| Landing | https://fimco-site.vercel.app | Public |
+| Operator Console | https://fimco-operator.vercel.app | Password-gated |
+| Client Portal | https://fimco-portal.vercel.app | Password-gated |
+
+The shared demo password (`DEMO_PASSWORD`) is set on the operator + portal projects and shared with
+FIMCO out-of-band (not stored here). Re-deploy any app with `vercel deploy --prod` from the repo
+root after `vercel link`-ing it.
+
+### Project settings applied (per project, needed for the npm-workspaces monorepo)
+- **Root Directory:** `apps/web-operator` · `apps/web-portal` · `apps/web-site`
+- **Install Command:** `npm install --ignore-scripts --include=dev`
+  (`--ignore-scripts` avoids an esbuild postinstall version clash from `tsx`/`vitest`; `--include=dev`
+  keeps TypeScript/Tailwind since Vercel builds in production mode). The apps also pin
+  `engines.node = 22.x`, set `experimental.outputFileTracingRoot` to the repo root, and carry their
+  own `typescript` + `@types/node` so the build is self-sufficient.
+- **Env:** `DEMO_PASSWORD` (operator, portal); `NEXT_PUBLIC_OPERATOR_URL` + `NEXT_PUBLIC_PORTAL_URL`
+  (site, pointing at the two demo URLs above).
+
 | App | Path | What it is | Public? |
 |---|---|---|---|
 | Landing | `apps/web-site` | Marketing / pitch page | Public |
