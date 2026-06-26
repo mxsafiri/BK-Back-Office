@@ -13,8 +13,12 @@ const NAV = [
 
 export function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
+  if (pathname === "/gate") return <>{children}</>;
   return (
     <div className="min-h-screen bg-canvas-base">
+      <div className="bg-warning-tint px-6 py-1.5 text-center text-xs font-medium text-warning">
+        Demo environment · sample data
+      </div>
       <header className="sticky top-0 z-10 border-b border-hairline bg-surface/90 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-[1100px] items-center justify-between gap-6 px-6">
           <Link href="/" className="flex items-center gap-2">

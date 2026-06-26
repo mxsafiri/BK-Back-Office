@@ -53,12 +53,19 @@ packages/
     kyc/             KYC port + in-memory stub (NIDA + bank reliance)
   adapters/    real outside-world integrations                          (deps: core, shared)
     ntzs/      nTZS HTTP CashLedger, webhook verifier + receiver
+  ui/          shared design system (Tailwind preset + components)          (deps: react)
+  api-client/  typed frontend↔backend contract (DTOs + fetch client)        (no deps)
 apps/
   api/           Fastify HTTP service + jobs (the one deployable backend)
     health · nTZS webhook (HMAC) · onboarding · account balance · default-deny RBAC
-  web-operator/  Next.js operator console                                   [planned]
-  web-portal/    Next.js client portal                                      [planned]
+  web-site/      Next.js landing / pitch page (public)
+  web-operator/  Next.js operator console (FIMCO navy/red brand)
+  web-portal/    Next.js client portal
 ```
+
+`web-operator` and `web-portal` are the demo apps (password-gated, sample data); `web-site` is the
+public landing page. See [`DEPLOYMENT.md`](./DEPLOYMENT.md) for the Vercel setup and
+[`DESIGN_SYSTEM.md`](./DESIGN_SYSTEM.md) for the brand.
 
 Run `npm install` once at the root; workspaces are linked automatically. `npm run test` /
 `typecheck` / `lint` / `build` operate across the whole repo. Run the backend locally with

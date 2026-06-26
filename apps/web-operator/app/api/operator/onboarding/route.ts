@@ -1,8 +1,9 @@
 import { NextResponse } from "next/server";
-import { ApiError, type OnboardRequest } from "@fimco/api-client";
-import { serverApi } from "@/lib/server-api";
+import type { OnboardRequest } from "@fimco/api-client";
+import { simulateOnboard } from "@/lib/demo";
 
-// BFF: the browser POSTs here (same-origin, no token); we call the backend with the server token.
+// DEMO: simulate onboarding in-memory (no hosted API). Same request/response contract as the
+// real backend, so swapping to the live API later is a one-line change.
 export async function POST(req: Request) {
   let body: OnboardRequest;
   try {
@@ -10,11 +11,9 @@ export async function POST(req: Request) {
   } catch {
     return NextResponse.json({ error: "invalid_json" }, { status: 400 });
   }
-  try {
-    const result = await serverApi().onboard(body);
-    return NextResponse.json(result, { status: result.account ? 201 : 200 });
-  } catch (err) {
-    if (err instanceof ApiError) return NextResponse.json({ error: err.code }, { status: err.status });
-    return NextResponse.json({ error: "upstream_unavailable" }, { status: 502 });
+  if (!body?.externalId || !body?.email || !body?.applicant?.fullName || !body?.applicant?.phoneNumber) {
+    return NextResponse.json({ error: "invalid_body" }, { status: 400 });
   }
+  const result = simulateOnboard(body);
+  return NextResponse.json(result, { status: result.account ? 201 : 200 });
 }

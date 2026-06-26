@@ -16,3 +16,4 @@ export { DataTable } from "./components/table";
 export type { Column } from "./components/table";
 export { AppShell, Sidebar, TopBar } from "./components/shell";
 export type { NavItem } from "./components/shell";
+export { GateScreen } from "./components/gate";

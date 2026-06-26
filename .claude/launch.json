@@ -2,6 +2,12 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start", "-w", "@fimco/web-site"],
+      "port": 3004
+    },
+    {
       "name": "operator",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start", "-w", "@fimco/web-operator"],

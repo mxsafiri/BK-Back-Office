@@ -62,11 +62,22 @@ export function TopBar({ title, subtitle, right }: { title: ReactNode; subtitle?
   );
 }
 
-export function AppShell({ sidebar, topbar, children }: { sidebar: ReactNode; topbar?: ReactNode; children: ReactNode }) {
+export function AppShell({
+  sidebar,
+  topbar,
+  banner,
+  children,
+}: {
+  sidebar: ReactNode;
+  topbar?: ReactNode;
+  banner?: ReactNode;
+  children: ReactNode;
+}) {
   return (
     <div className="flex min-h-screen bg-canvas-base">
       {sidebar}
       <div className="flex min-w-0 flex-1 flex-col">
+        {banner}
         {topbar}
         <main className="mx-auto w-full max-w-[1280px] flex-1 px-6 py-6">{children}</main>
       </div>

@@ -26,8 +26,15 @@ function Brand() {
 
 export function OperatorShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
+  // The gate (login) renders full-screen, without the app chrome.
+  if (pathname === "/gate") return <>{children}</>;
   return (
     <AppShell
+      banner={
+        <div className="bg-warning-tint px-6 py-1.5 text-center text-xs font-medium text-warning">
+          Demo environment · sample data — not real client money
+        </div>
+      }
       sidebar={
         <Sidebar
           brand={<Brand />}
