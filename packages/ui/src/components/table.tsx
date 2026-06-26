@@ -57,15 +57,29 @@ export function DataTable<T>({
             {columns.map((col) => (
               <th
                 key={col.key}
+                aria-sort={
+                  sort?.key === col.key ? (sort.dir === "asc" ? "ascending" : "descending") : col.sortable ? "none" : undefined
+                }
                 className={cn(
                   "bg-surface px-4 py-3 text-xs font-semibold uppercase tracking-wider text-muted",
                   col.align === "right" ? "text-right" : "text-left",
-                  col.sortable && "cursor-pointer select-none hover:text-ink",
                 )}
-                onClick={col.sortable ? () => toggleSort(col.key) : undefined}
               >
-                {col.header}
-                {sort?.key === col.key && <span className="ml-1">{sort.dir === "asc" ? "↑" : "↓"}</span>}
+                {col.sortable ? (
+                  <button
+                    type="button"
+                    onClick={() => toggleSort(col.key)}
+                    className={cn(
+                      "inline-flex items-center gap-1 rounded uppercase tracking-wider hover:text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-brand",
+                      col.align === "right" && "flex-row-reverse",
+                    )}
+                  >
+                    {col.header}
+                    {sort?.key === col.key && <span aria-hidden="true">{sort.dir === "asc" ? "↑" : "↓"}</span>}
+                  </button>
+                ) : (
+                  col.header
+                )}
               </th>
             ))}
           </tr>

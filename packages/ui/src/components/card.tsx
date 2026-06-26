@@ -19,7 +19,7 @@ export function SectionCard({
   return (
     <Card className={className}>
       <div className="flex items-center justify-between border-b border-hairline px-5 py-4">
-        <h3 className="font-heading text-base font-semibold text-ink">{title}</h3>
+        <h2 className="font-heading text-base font-semibold text-ink">{title}</h2>
         {action}
       </div>
       <div className="p-5">{children}</div>

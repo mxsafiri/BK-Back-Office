@@ -26,12 +26,12 @@ export default function CashPage() {
         <SectionCard title="Move money" className="lg:col-span-2">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="rounded-lg border border-hairline p-4">
-              <h4 className="font-heading font-semibold text-ink">Deposit</h4>
+              <h3 className="font-heading font-semibold text-ink">Deposit</h3>
               <p className="mt-1 text-sm text-muted">On-ramp from mobile money or card; nTZS is minted 1:1.</p>
               <Button className="mt-3">Deposit funds</Button>
             </div>
             <div className="rounded-lg border border-hairline p-4">
-              <h4 className="font-heading font-semibold text-ink">Withdraw</h4>
+              <h3 className="font-heading font-semibold text-ink">Withdraw</h3>
               <p className="mt-1 text-sm text-muted">Off-ramp to mobile money.</p>
               <Button variant="secondary" className="mt-3">Withdraw funds</Button>
             </div>

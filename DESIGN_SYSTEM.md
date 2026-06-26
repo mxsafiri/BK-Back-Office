@@ -65,17 +65,17 @@ maker-checker reuse the same set (Awaiting review = warning, Approved = success,
 
 ### Radius · Shadow · Spacing
 - **Radius:** sm 6 · md 10 · lg 14 · xl 20 · 2xl 24 · pill 9999 (buttons/chips/badges). No 90° corners.
-- **Shadow:** `xs 0 1px 2px` · `sm 0 2px 8px` · `md 0 4px 16px` · `lg 0 8px 28px` (all `rgba(31,27,25,low)`).
-  Focus ring `0 0 0 3px rgba(199,106,87,.35)`. Elevation = border + soft shadow, never neumorphism.
+- **Shadow:** `xs 0 1px 2px` · `sm 0 2px 8px` · `md 0 4px 16px` · `lg 0 8px 28px` (all `rgba(20,32,46,low)`).
+  Focus ring = `ring-2 ring-brand` (navy `#1F3A5C`). Elevation = border + soft shadow, never neumorphism.
 - **Spacing:** 4px base — 2,4,8,12,16,20,24,32,40,48,64,80. Sidebar 240px. Card padding 16–20px.
 
 ## Components (`packages/ui`)
 
-`AppShell` (terracotta `Sidebar` + `TopBar` + content; active nav = white pill with terracotta
-text) · `Button` (primary/secondary/ghost/destructive, pill) · `Card` / `SectionCard` · `KpiTile`
+`AppShell` (navy `Sidebar` + `TopBar` + content; active nav = white pill with navy text) ·
+`Button` (primary/secondary/ghost/destructive, pill) · `Card` / `SectionCard` · `KpiTile`
 + `DeltaChip` · **`MoneyAmount`** (minor-units in, `TZS`, sign-aware color, tabular-nums) ·
-`StatusBadge` (semantic map only) · **`DataTable`** (muted headers, hairline rows, peach zebra,
-sortable, sticky header, summary row, empty + skeleton states, row → detail) · `Tag` (solid-brand
+`StatusBadge` (semantic map only) · **`DataTable`** (muted headers, hairline rows, navy-wash zebra,
+keyboard-sortable headers with `aria-sort`, empty + skeleton states, row → detail) · `Tag` (solid-brand
 and tint variants) · `Avatar` (presence dot) · `FormField`/`Input`/`Select` (label, helper, error
 ring) · `Stepper` · `Modal` · `Drawer`/`DetailPanel` · `Toast`/`Banner` · `KeyValueList` ·
 `ActivityFeed` row · `EmptyState` · `Skeleton` · **`MakerCheckerPanel`** + **`ConfirmationGuard`**
@@ -89,7 +89,8 @@ status palette (one meaning per color); surface idempotency state, nTZS tx refer
 maker-checker status on money actions; show that balances are read **live** (never cached) and the
 async **"requested"** state for withdrawals ≥ 1,000,000 TZS; use skeletons for loading financial data.
 
-**Don't** — use brand terracotta for danger (use `#D14B45`); render money from floats or omit the
-unit; let one actor initiate **and** approve (the UI hides/disables self-approval); put primary data
-in muted-slate on cream; show a user-facing dark theme in v1; depict UPDATE/DELETE of ledger rows —
-corrections are reversing entries (reflected in the reconciliation UI).
+**Don't** — use navy (the primary colour) to signal danger — danger is red (`#C2241F`); render money
+from floats or omit the unit; let one actor initiate **and** approve (the UI hides/disables
+self-approval); put primary data in muted tones on the light canvas; show a user-facing dark theme in
+v1; depict UPDATE/DELETE of ledger rows — corrections are reversing entries (reflected in the
+reconciliation UI).

@@ -112,8 +112,14 @@ export function Banner({
   children?: ReactNode;
   className?: string;
 }) {
+  // Errors/failures need prompt SR attention; other tones are polite.
+  const assertive = tone === "danger";
   return (
-    <div className={cn("rounded-lg border px-4 py-3 text-sm", TONE[tone], "border-current/20", className)} role="status">
+    <div
+      className={cn("rounded-lg border px-4 py-3 text-sm", TONE[tone], "border-current/20", className)}
+      role={assertive ? "alert" : "status"}
+      aria-live={assertive ? "assertive" : "polite"}
+    >
       {title && <p className="font-semibold">{title}</p>}
       {children && <div className={cn(title && "mt-0.5", "text-ink/80")}>{children}</div>}
     </div>

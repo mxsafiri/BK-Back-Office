@@ -14,7 +14,7 @@ const NAV = [
 export function PortalShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname() || "/";
   return (
-    <div className="min-h-screen bg-canvas-cream">
+    <div className="min-h-screen bg-canvas-base">
       <header className="sticky top-0 z-10 border-b border-hairline bg-surface/90 backdrop-blur">
         <div className="mx-auto flex h-16 w-full max-w-[1100px] items-center justify-between gap-6 px-6">
           <Link href="/" className="flex items-center gap-2">

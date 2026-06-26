@@ -23,8 +23,8 @@ export default function ActivityPage() {
             </tr>
           </thead>
           <tbody>
-            {ACTIVITY.map((a, i) => (
-              <tr key={i} className="border-b border-hairline last:border-0 even:bg-surface-alt">
+            {ACTIVITY.map((a) => (
+              <tr key={a.ref} className="border-b border-hairline last:border-0 even:bg-surface-alt">
                 <td className="px-5 py-3 text-muted">{a.date}</td>
                 <td className="px-5 py-3 font-medium text-ink">{a.what}</td>
                 <td className="px-5 py-3 font-mono text-xs text-muted">{a.ref}</td>

@@ -20,7 +20,8 @@ export function MoneyAmount({
   const neg = isNegativeMinor(minor);
   return (
     <span className={cn("tabular whitespace-nowrap font-medium", colored && (neg ? "text-danger" : "text-success"), className)}>
-      <span className="text-muted">{currency} </span>
+      {/* prefix inherits the parent text colour (works on light cards and dark/navy fills) */}
+      <span className="opacity-70">{currency} </span>
       {formatMinor(minor)}
     </span>
   );

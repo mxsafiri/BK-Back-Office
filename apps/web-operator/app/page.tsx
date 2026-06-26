@@ -2,17 +2,27 @@ import Link from "next/link";
 import { UserPlus, Wallet, Scale, ArrowRight } from "lucide-react";
 import { PageHeader, KpiTile, SectionCard, StatusBadge, MoneyAmount, Card } from "@fimco/ui";
 
-const ACTIVITY = [
-  { who: "ntzs", action: "Deposit confirmed", subject: "usr_8f…21 · TZS 250,000", status: "Confirmed", at: "2 min ago" },
-  { who: "ops.alice", action: "Onboarding proposed", subject: "cli_a3…77 (Asha Mussa)", status: "Pending", at: "14 min ago" },
-  { who: "ops.bob", action: "Withdrawal approved", subject: "req_55…02 · TZS 1,200,000", status: "Requested", at: "1 hr ago" },
-  { who: "system", action: "Reconciliation completed", subject: "412 accounts · 1 break", status: "Break", at: "Today 06:00" },
+// `amount` is integer minor units (TZS minor == 1 TZS) so it can render via MoneyAmount, never a baked string.
+type Activity = {
+  who: string;
+  action: string;
+  ref: string;
+  amount?: string;
+  status: string;
+  at: string;
+};
+
+const ACTIVITY: Activity[] = [
+  { who: "ntzs", action: "Deposit confirmed", ref: "usr_8f…21", amount: "250000", status: "Confirmed", at: "2 min ago" },
+  { who: "ops.alice", action: "Onboarding proposed", ref: "cli_a3…77 (Asha Mussa)", status: "Pending", at: "14 min ago" },
+  { who: "ops.bob", action: "Withdrawal approved", ref: "req_55…02", amount: "1200000", status: "Requested", at: "1 hr ago" },
+  { who: "system", action: "Reconciliation completed", ref: "412 accounts · 1 break", status: "Break", at: "Today 06:00" },
 ];
 
 const QUICK = [
-  { href: "/onboarding", label: "Onboard a client", icon: <UserPlus size={18} /> },
-  { href: "/accounts", label: "Look up a balance", icon: <Wallet size={18} /> },
-  { href: "/reconciliation", label: "Review breaks", icon: <Scale size={18} /> },
+  { href: "/onboarding", label: "Onboard a client", icon: <UserPlus size={18} aria-hidden /> },
+  { href: "/accounts", label: "Look up a balance", icon: <Wallet size={18} aria-hidden /> },
+  { href: "/reconciliation", label: "Review breaks", icon: <Scale size={18} aria-hidden /> },
 ];
 
 export default function DashboardPage() {
@@ -30,12 +40,14 @@ export default function DashboardPage() {
       <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
         <SectionCard title="Recent activity" className="lg:col-span-2">
           <ul className="divide-y divide-hairline">
-            {ACTIVITY.map((a, i) => (
-              <li key={i} className="flex items-center justify-between gap-4 py-3">
+            {ACTIVITY.map((a) => (
+              <li key={a.ref} className="flex items-center justify-between gap-4 py-3">
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-ink">{a.action}</p>
                   <p className="truncate text-xs text-muted">
-                    {a.subject} · <span className="font-mono">{a.who}</span>
+                    {a.ref}
+                    {a.amount ? <> · <MoneyAmount minor={a.amount} /></> : null} ·{" "}
+                    <span className="font-mono">{a.who}</span>
                   </p>
                 </div>
                 <div className="flex shrink-0 items-center gap-3">
@@ -48,7 +60,7 @@ export default function DashboardPage() {
         </SectionCard>
 
         <Card className="p-5">
-          <h3 className="font-heading text-base font-semibold text-ink">Quick actions</h3>
+          <h2 className="font-heading text-base font-semibold text-ink">Quick actions</h2>
           <p className="mt-1 text-sm text-muted">Common back-office tasks.</p>
           <div className="mt-4 space-y-2">
             {QUICK.map((q) => (
@@ -61,7 +73,7 @@ export default function DashboardPage() {
                   <span className="text-brand">{q.icon}</span>
                   {q.label}
                 </span>
-                <ArrowRight size={16} className="text-muted" />
+                <ArrowRight size={16} className="text-muted" aria-hidden />
               </Link>
             ))}
           </div>

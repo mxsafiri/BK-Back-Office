@@ -25,8 +25,13 @@ export default function OverviewPage() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <div className="rounded-xl bg-canvas-brand p-6 text-white shadow-sm lg:col-span-1">
           <p className="text-xs font-semibold uppercase tracking-wider text-white/80">Total value</p>
-          <p className="mt-2 font-heading text-3xl font-bold tabular">TZS 6,080,000</p>
-          <p className="mt-1 text-sm text-white/85">↑ 2.4% · TZS 142,000 today</p>
+          <p className="mt-2 font-heading text-3xl font-bold tabular">
+            <MoneyAmount minor={"6080000"} className="font-bold text-white" />
+          </p>
+          <p className="mt-1 text-sm text-white/85">
+            <span aria-hidden="true">↑</span>
+            <span className="sr-only">Up</span> 2.4% · <MoneyAmount minor={"142000"} className="text-white/85" /> today
+          </p>
         </div>
         <KpiTile label="Cash (nTZS)" value={<MoneyAmount minor={"1250000"} />} hint="Available to invest or withdraw" />
         <KpiTile label="Holdings value" value={<MoneyAmount minor={"4830000"} />} delta={{ value: "3.1%", positive: true }} />
@@ -34,10 +39,10 @@ export default function OverviewPage() {
 
       <div className="mt-4 flex flex-wrap gap-3">
         <Link href="/cash" className="inline-flex items-center gap-2 rounded-pill bg-brand px-4 py-2.5 text-sm font-medium text-white hover:bg-brand-hover">
-          <ArrowDownToLine size={16} /> Deposit
+          <ArrowDownToLine size={16} aria-hidden /> Deposit
         </Link>
         <Link href="/cash" className="inline-flex items-center gap-2 rounded-pill border border-hairline bg-surface px-4 py-2.5 text-sm font-medium text-ink hover:bg-surface-subtle">
-          <ArrowUpFromLine size={16} /> Withdraw
+          <ArrowUpFromLine size={16} aria-hidden /> Withdraw
         </Link>
       </div>
 
@@ -74,8 +79,8 @@ export default function OverviewPage() {
 
         <SectionCard title="Recent activity">
           <ul className="space-y-3">
-            {ACTIVITY.map((a, i) => (
-              <li key={i} className="flex items-center justify-between gap-3">
+            {ACTIVITY.map((a) => (
+              <li key={a.what} className="flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <p className="truncate text-sm font-medium text-ink">{a.what}</p>
                   <p className="text-xs text-muted">{a.at}</p>

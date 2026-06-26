@@ -30,11 +30,14 @@ module.exports = {
         muted: "#5A6776",
         faint: "#93A0AE",
         hairline: "#E2E7EE",
-        success: { DEFAULT: "#2F9E5E", tint: "#D6F0DF" },
-        warning: { DEFAULT: "#E08A1E", tint: "#FBE9CE" },
-        danger: { DEFAULT: "#D8302B", tint: "#FBE3E2" }, // == FIMCO red
-        info: { DEFAULT: "#2D6FE0", tint: "#DCE7FB" },
-        processing: { DEFAULT: "#6E59E0", tint: "#E6E1FB" },
+        // Semantic colours are tuned to clear WCAG AA (>=4.5:1) as text on white AND on their
+        // own tint. `danger` is a touch deeper than the brand red (`accent`) so danger TEXT is
+        // accessible; the exact FIMCO red lives in `accent` (logo/brand) + destructive fills.
+        success: { DEFAULT: "#1E7A45", tint: "#D6F0DF" },
+        warning: { DEFAULT: "#8A5200", tint: "#FBE9CE" },
+        danger: { DEFAULT: "#C2241F", tint: "#FBE3E2" },
+        info: { DEFAULT: "#1F54B0", tint: "#DCE7FB" },
+        processing: { DEFAULT: "#4B38B5", tint: "#E6E1FB" },
       },
       fontFamily: {
         sans: ["var(--font-inter)", "ui-sans-serif", "system-ui", "sans-serif"],

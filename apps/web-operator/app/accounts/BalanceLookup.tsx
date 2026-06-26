@@ -17,9 +17,19 @@ export function BalanceLookup({ initialId }: { initialId: string }) {
     setData(null);
     try {
       const res = await fetch(`/api/operator/balance?accountId=${encodeURIComponent(accountId)}`);
-      const body = await res.json();
-      if (!res.ok) setErr(body.error ?? `HTTP ${res.status}`);
-      else setData(body as AccountBalanceResponse);
+      const text = await res.text();
+      let body: unknown;
+      try {
+        body = text ? JSON.parse(text) : undefined;
+      } catch {
+        body = undefined; // non-JSON upstream (e.g. an HTML 502 page)
+      }
+      if (!res.ok) {
+        const code = body && typeof (body as { error?: unknown }).error === "string" ? (body as { error: string }).error : `HTTP ${res.status}`;
+        setErr(code);
+      } else {
+        setData(body as AccountBalanceResponse);
+      }
     } catch {
       setErr("Could not reach the API. Is the backend running on :3001?");
     } finally {

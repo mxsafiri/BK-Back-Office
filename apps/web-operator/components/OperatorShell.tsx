@@ -5,12 +5,12 @@ import { LayoutDashboard, UserPlus, Wallet, Scale, ShieldCheck, ScrollText, Bell
 import { AppShell, Sidebar, TopBar, Avatar, Badge, type NavItem } from "@fimco/ui";
 
 const NAV: NavItem[] = [
-  { href: "/", label: "Dashboard", icon: <LayoutDashboard size={18} /> },
-  { href: "/onboarding", label: "Onboarding", icon: <UserPlus size={18} /> },
-  { href: "/accounts", label: "Accounts & Balances", icon: <Wallet size={18} /> },
-  { href: "/reconciliation", label: "Reconciliation", icon: <Scale size={18} /> },
-  { href: "/maker-checker", label: "Maker-checker", icon: <ShieldCheck size={18} /> },
-  { href: "/audit", label: "Audit log", icon: <ScrollText size={18} /> },
+  { href: "/", label: "Dashboard", icon: <LayoutDashboard size={18} aria-hidden /> },
+  { href: "/onboarding", label: "Onboarding", icon: <UserPlus size={18} aria-hidden /> },
+  { href: "/accounts", label: "Accounts & Balances", icon: <Wallet size={18} aria-hidden /> },
+  { href: "/reconciliation", label: "Reconciliation", icon: <Scale size={18} aria-hidden /> },
+  { href: "/maker-checker", label: "Maker-checker", icon: <ShieldCheck size={18} aria-hidden /> },
+  { href: "/audit", label: "Audit log", icon: <ScrollText size={18} aria-hidden /> },
 ];
 
 function Brand() {
