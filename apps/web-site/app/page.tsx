@@ -86,16 +86,16 @@ export default function LandingPage() {
           A trade is settled only when both legs reconcile — delivery-versus-payment across two systems.
         </p>
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          <div className="rounded-2xl border border-hairline bg-surface p-7 shadow-sm">
-            <Scale className="text-brand" aria-hidden />
+          <div>
+            <Scale className="text-brand" size={28} aria-hidden />
             <h3 className="mt-4 font-heading text-lg font-semibold text-ink">Securities ledger — we build it</h3>
             <p className="mt-2 text-muted">
               An append-only, event-sourced record of every order, execution and position. Corrections are
               reversing entries, never edits — so the audit trail is a by-product, not an afterthought.
             </p>
           </div>
-          <div className="rounded-2xl border border-hairline bg-surface p-7 shadow-sm">
-            <Wallet className="text-brand" aria-hidden />
+          <div>
+            <Wallet className="text-brand" size={28} aria-hidden />
             <h3 className="mt-4 font-heading text-lg font-semibold text-ink">Cash ledger — settled on nTZS</h3>
             <p className="mt-2 text-muted">
               Client money lives in per-client nTZS sub-wallets; firm funds are segregated by purpose. We never
