@@ -4,12 +4,12 @@ The specific external answers needed to unblock the money-critical build. Each i
 **who to ask**, **what to ask**, and **what it unblocks**. Record answers inline (date + source)
 so `CLAUDE.md` "BLOCKED" items can be lifted one by one.
 
-Priority order: **1 (CMSA custody) is the critical path.** Start it first; it has the longest
-lead time and gates the most.
+Priority order: item 1 is **answered** (2026-07-13). **Items 2 (DSE/CSD specs) and 4
+(fees/formats) now gate the most** — chase those first.
 
 ---
 
-## 1. CMSA — client money & the T+0 settlement model  [CRITICAL PATH]
+## 1. Client money & the T+0 settlement model  [ANSWERED 2026-07-13]
 
 **Ask:**
 - Can client funds be held as **nTZS in per-client subwallets** and count as segregated client
@@ -29,10 +29,20 @@ the `CashLedger` backing-store decision; hosting target.
 **Recommended:** get this in writing, with legal counsel involved.
 
 **Answer (record here):**
-- Date / source:
-- Decision: nTZS-only ▢   hybrid (bank trust + nTZS) ▢   bank-only for client money ▢
-- T+0 advance permitted: yes ▢  no ▢  conditions:
-- Residency:
+- Date / source: **2026-07-13 — NEDA Labs × FIMCO partnership position**, recorded in the Scope of
+  Work (FIMCO_NEDA_Scope_of_Work_and_Investment.docx). nTZS is live production infrastructure
+  operated within the NEDA ecosystem.
+- Decision: **nTZS-only ☑** — nTZS is 1:1 TZS-backed e-money used purely as a settlement/collection
+  rail, not a speculative asset and not a new custody model. Client money remains TZS; FIMCO's
+  broker obligations are unchanged, so no separate CMSA ruling is required to use the rail. FIMCO
+  (the licensed dealing member) confirms its regulatory posture within its standard CMSA
+  relationship — tracked as a Week-4 FIMCO obligation in the SOW.
+- T+0 advance permitted: **yes ☑** — T+0 on the cash leg is native nTZS behaviour (instant
+  collection, same-day cash settlement). Seller payouts ahead of CSD settlement are a
+  reserves-backed product feature (config-gated + maker-checked) — a business decision, not a
+  regulatory blocker.
+- Residency: **still open** — hosting/deploy-target decision needed before go-live; does not block
+  the build.
 
 ---
 
@@ -61,6 +71,10 @@ the `CashLedger` backing-store decision; hosting target.
 ---
 
 ## 3. nTZS team — partner terms & treasury
+
+> **Note (2026-07-13):** nTZS is NEDA-ecosystem infrastructure, live in production — these are
+> internal NEDA items rather than external discovery, and nTZS is **not** a FIMCO dependency.
+> Record pricing/limits/SLAs here as they are formalized for the FIMCO deployment.
 
 **Ask:**
 - **Partner onboarding / KYB** for FIMCO; production vs test key issuance.
@@ -110,7 +124,7 @@ contract-note layout, the reporting module.
 
 - [ ] FIMCO engagement scope and funding confirmed.
 - [ ] nTZS partner terms agreed (Item 3).
-- [ ] Hosting/residency decision made (depends on Item 1).
+- [ ] Hosting/residency decision made (before go-live; no longer blocks the build).
 - [ ] Named accountable owner for money-movement logic and security sign-off.
 
 ---
@@ -119,10 +133,10 @@ contract-note layout, the reporting module.
 
 | # | Item | Owner | Status | Date answered |
 |---|------|-------|--------|---------------|
-| 1 | CMSA client money / T+0 |  | ▢ open |  |
-| 2 | DSE/CSD integration |  | ▢ open |  |
-| 3 | nTZS partner terms |  | ▢ open |  |
-| 4 | Fees / reporting formats |  | ▢ open |  |
-| 5 | Commercial readiness |  | ▢ open |  |
+| 1 | Client money / T+0 (nTZS rail) | NEDA × FIMCO | ☑ answered (residency sub-item open) | 2026-07-13 |
+| 2 | DSE/CSD integration | FIMCO | ▢ open — now the critical path |  |
+| 3 | nTZS terms (NEDA-provided) | NEDA | ◐ in hand — formalize pricing/SLAs |  |
+| 4 | Fees / reporting formats | FIMCO | ▢ open |  |
+| 5 | Commercial readiness | NEDA × FIMCO | ◐ in progress (SOW drafted) |  |
 
 When an item is answered, lift the matching entry from the **BLOCKED** list in `CLAUDE.md`.

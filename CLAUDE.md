@@ -38,11 +38,15 @@ nTZS is a Tanzania-backed stablecoin with Wallet-as-a-Service. Docs: https://www
 - **Withdrawal/off-ramp:** `POST /withdrawals` burns nTZS, pays mobile money. **>= 1,000,000 TZS requires nTZS admin approval** — handle the async `requested` status, do not assume instant completion.
 - **Balance:** `GET /users/:id` reads live on-chain balance (no caching). Check before every transfer/withdrawal.
 
-### T+0 model and its boundary
-nTZS gives **T+0 on the cash leg only**. The securities leg still settles at the DSE CSD on
-its T+2/T+3 cycle. Paying a seller at T+0 before CSD settlement is a **settlement advance** —
-a reserve-backed credit position. **Do not implement T+0 seller payouts until the CMSA
-client-money ruling (see BLOCKED below) confirms it is permitted and how the float must be backed.**
+### T+0 model (position decided 2026-07-13 — see DISCOVERY_CHECKLIST item 1)
+nTZS is **live production infrastructure**: 1:1 TZS-backed e-money used purely as a settlement
+and collection rail. Client money remains TZS; the custody model and FIMCO's broker obligations
+are unchanged — using the rail requires no separate regulatory approval (FIMCO confirms its
+posture within its standard CMSA relationship). nTZS gives **T+0 on the cash leg** (instant
+collection, same-day cash settlement); the securities leg still settles at the DSE CSD on its
+T+2/T+3 cycle. Paying a seller before CSD settlement is a **settlement advance** — a business
+feature, not a regulatory blocker, but it MUST be backed by the `Reserves` treasury float,
+gated behind config, and pass maker-checker like any other money movement.
 
 ## NON-NEGOTIABLE money-movement rules
 
@@ -73,9 +77,9 @@ These are invariants. Code that violates them must not be merged.
 - **Postgres** as system of record; event-sourced trade log.
 - **One integration adapter per external party** (nTZS, DSE, CSD, NIDA/bank KYC, bank statements).
   Each adapter is **independently stubbable** so the core builds and tests without live access.
-- **Cash store behind an interface.** The custody design (nTZS-only vs nTZS + bank trust account)
-  is not yet final (CMSA ruling pending). Program the cash ledger against a `CashLedger` interface
-  so the backing store can change without rewriting the back office.
+- **Cash store behind an interface.** The custody design is decided — nTZS-only, as a 1:1 TZS
+  settlement rail (DISCOVERY_CHECKLIST item 1). Keep the `CashLedger` interface anyway: it is what
+  lets the core build and test offline, and it would absorb any future backing-store change cheaply.
 - **Settlement cycle is a config value**, not a constant. Brief says T+2; public DSE rules say T+3.
   Default to config; confirm before go-live.
 - Backend: TypeScript/Node (nTZS SDK is JS-native; strong typing for money logic). Frontend: React.
@@ -92,19 +96,21 @@ These are invariants. Code that violates them must not be merged.
 
 These depend on external answers. Building them now means guessing and reworking.
 
-- **Final cash-leg / custody design** — pending CMSA ruling on client funds as nTZS and on T+0
-  settlement advances. Until then: build against the `CashLedger` interface, do NOT hardcode
-  T+0 seller payouts.
+- ~~Final cash-leg / custody design~~ — **LIFTED 2026-07-13**: nTZS-only design confirmed
+  (DISCOVERY_CHECKLIST item 1). The cash leg and T+0 settlement advances are buildable now —
+  advances stay reserves-backed, config-gated, and maker-checked.
 - **DSE/CSD reconciliation + settlement instruction format** — pending DSE API specs.
 - **Exact settlement cycle (T+2/T+3)** — config-driven; confirm value.
 - **Regulatory report formats** — pending CMSA/DSE specs.
-- **Hosting/data residency** — pending CMSA expectation; affects deploy target.
+- **Hosting/data residency** — decide before go-live; affects the deploy target only, not the build.
 
 ## What IS safe to build now
 
-Repo scaffold, securities ledger + event store, RBAC/maker-checker/audit, nTZS integration
-against the **test environment**, sub-wallet topology, fee/tax engine structure (configurable
-tariffs), contract-note generation, operator console shell, client portal shell, CI. See BUILD_PLAN.md.
+Repo scaffold, securities ledger + event store, RBAC/maker-checker/audit, the full nTZS cash leg
+(test env first, then live rails — instant collection and T+0 cash-leg settlement), sub-wallet
+topology, reserves-backed settlement advances (config-gated), fee/tax engine structure
+(configurable tariffs), contract-note generation, operator console shell, client portal shell,
+CI. See BUILD_PLAN.md.
 
 ## Conventions
 
